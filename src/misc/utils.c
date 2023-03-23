@@ -3,8 +3,6 @@
 
 #include "utils.h"
 
-double snap_runtime;
-
 double get_seconds() {
     struct timeval tp;
     gettimeofday(&tp, NULL);

@@ -1,8 +1,8 @@
 # run autoconf to produce the configure script
-AC_PREREQ(2.63)
+AC_PREREQ([2.71])
 
 # initialize
-AC_INIT([snap],[0.4],[snap-graph-support@sourceforge.net])
+AC_INIT([snap],[0.4],[snap-graph-support@lists.sourceforge.net])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR(src/graph_kernels/breadth_first_search.c)
 AC_CONFIG_HEADERS([config.h])
@@ -21,17 +21,11 @@ fi
 # check for C compiler
 AC_PROG_CC
 
-# Check for C99 support.
-AC_PROG_CC_C99
-
 # macro for determining compiler vendor
 AX_COMPILER_VENDOR
 
 # check for libtool
 LT_INIT
-
-# macro for determining optimization flags
-AX_CC_MAXOPT
 
 # override CFLAGS selection when debug option is selected
 if test "${enable_debug}" = "yes"; then
@@ -97,7 +91,6 @@ AC_CHECK_HEADERS([math.h], [AC_DEFINE([HAVE_MATH_H],[1],[Define to 1 if you have
 AC_C_CONST
 AC_C_INLINE
 AC_TYPE_SIZE_T
-AC_HEADER_TIME
 AC_STRUCT_TM
 
 # check functions

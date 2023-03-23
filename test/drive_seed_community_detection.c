@@ -211,7 +211,11 @@ identify_comm (int *num_communities, attr_id_t *comm_root, attr_id_t *comm_size,
 	      //membership[w] = seedv;
 	      //int loc;
 	      //OMP("omp atomic") loc = k2++;
+#ifdef _OPENMP
 	      queue[atomic_fetch_and_add (&k2, 1)] = w;
+#else
+	      queue[k2++] = w;
+#endif
 	    }
 	  }
 	}

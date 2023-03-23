@@ -1,7 +1,7 @@
 #if !defined(INTERNAL_TIMER_HEADER_)
 #define INTERNAL_TIMER_HEADER_
 
-extern double snap_runtime; /* Defined in utils.c */
+extern double snap_runtime;
 
 #if defined(__MTA__) /* Platform options */
 
