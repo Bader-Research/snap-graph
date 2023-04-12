@@ -339,7 +339,7 @@ int main (int argc, char* argv[])
 	int i;
 
 	/* Initialize the random number generator */
-	srand48 (time (NULL));
+	srand (time (NULL));
 
 	/* Parse command line options  */
 	if (argc < 3) {

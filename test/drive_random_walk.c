@@ -2,7 +2,6 @@
 #include <time.h>
 #include <limits.h>
 #include <errno.h>
-#include <alloca.h>
 
 #include "graph_defs.h"
 #include "graph_gen.h"
@@ -20,7 +19,7 @@ int main (int argc, char* argv[])
      unsigned long i, nseeds = 3, walklen = 3;
 
      /* Initialize the random number generator */
-     srand48 (time (NULL));
+     srand (time (NULL));
 
      /* Parse command line options  */
      if (argc > 4) {
@@ -47,10 +46,10 @@ int main (int argc, char* argv[])
      }
 
      /* Generate graph */
-     graph_type = (char *) alloca (500 * sizeof (char));
+     graph_type = (char *) malloc (500 * sizeof (char));
      memset (graph_type, 0, 500);
      graph_ext_check(infilename, graph_type);
-     g = (graph_t *) alloca (sizeof (graph_t));
+     g = (graph_t *) malloc (sizeof (graph_t));
      assert(g != NULL);
      graph_gen(g, infilename, graph_type);
 
@@ -61,6 +60,7 @@ int main (int argc, char* argv[])
      for (i = 1; i < nseeds; ++i)
 	  printf (" %lu", (unsigned long)seeds[i]);
      printf ("\n");
-
+     free(graph_type);
+     free(g);
      return 0;
 }

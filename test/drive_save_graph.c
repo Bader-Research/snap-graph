@@ -2,7 +2,6 @@
 #include <time.h>
 #include <limits.h>
 #include <errno.h>
-#include <alloca.h>
 
 #include "graph_defs.h"
 #include "graph_gen.h"
@@ -37,10 +36,10 @@ int main (int argc, char* argv[])
   outfilename = "save.gr";
 
   /* Generate graph */
-  graph_type = (char *) alloca (500 * sizeof(char));
+  graph_type = (char *) malloc (500 * sizeof(char));
   memset (graph_type, 0, 500);
   graph_ext_check(infilename, graph_type);
-  g = (graph_t *) alloca (sizeof (graph_t));
+  g = (graph_t *) malloc (sizeof (graph_t));
   assert(g != NULL);
   graph_gen(g, infilename, graph_type);
 
@@ -61,10 +60,10 @@ int main (int argc, char* argv[])
   graph_t *sg;
   char *sgraph_type;
 
-  sgraph_type = (char*) alloca (500 * sizeof(char));
+  sgraph_type = (char*) malloc (500 * sizeof(char));
   memset (sgraph_type, 0, 500);
   graph_ext_check(outfilename, sgraph_type);
-  sg = (graph_t *) alloca (sizeof(graph_t));
+  sg = (graph_t *) malloc (sizeof(graph_t));
   assert(sg != NULL);
   graph_gen(sg, outfilename, sgraph_type);
   fprintf(stderr, "Read in the saved graph...\n");
@@ -94,6 +93,10 @@ int main (int argc, char* argv[])
   free (tmp2);
   free_graph(g);
   free_graph(sg);
+  free (sgraph_type);
+  free (sg);
+  free (graph_type);
+  free (g);
 
   return 0;
 }

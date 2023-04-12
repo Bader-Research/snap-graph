@@ -1,6 +1,8 @@
 #include <time.h>
 #include <unistd.h>
 
+#define rand_dbl() ((double)rand()/RAND_MAX)
+
 #include "utils.h"
 
 double get_seconds() {
@@ -312,7 +314,7 @@ random_walk(graph_t *g, attr_id_t V, int num_levels)
 	  if(deg_V == 0) {
 	       //if degree of V is zero then new random vertex will be taken as the source	       return -2;
 	  }
-	  rand_num = (attr_id_t) (drand48() * deg_V);
+	  rand_num = (attr_id_t) (rand_dbl() * deg_V);
 	  index = g->numEdges[V] + rand_num;
 	  V = g->endV[index];
      }
@@ -341,10 +343,10 @@ generate_random_walk_seeds(graph_t *g, int num_seeds, int num_levels, attr_id_t 
 
      /* Initialize the random number generator */
      t0 = ((int)time (NULL)) ^ ((int)getpid ());
-     srand48 (t0);
+     srand (t0);
 
      //Generating a random vertex to begin the random walk
-     random_vertex = (attr_id_t) (drand48() * g->n);
+     random_vertex = (attr_id_t) (rand_dbl() * g->n);
 
      for(i=0; i<num_seeds; i++)
 	  seeds[i] = -1;
@@ -354,7 +356,7 @@ generate_random_walk_seeds(graph_t *g, int num_seeds, int num_levels, attr_id_t 
 	  S = random_walk(g, random_vertex, num_levels);
 
 	  if(S == -2) {
-	       random_vertex = (attr_id_t) (drand48() * g->n);
+	       random_vertex = (attr_id_t) (rand_dbl() * g->n);
 	       continue;
 	  }
 
@@ -371,7 +373,7 @@ generate_random_walk_seeds(graph_t *g, int num_seeds, int num_levels, attr_id_t 
 	       if(num_repeats > 100) {
 		    //if the same vertex gets repeated many times then choose another source vertex
 		    /*printf("\n Number of repeats are too large...Generating another random vertex\n");*/
-		    random_vertex = (attr_id_t) (drand48() * g->n);
+		    random_vertex = (attr_id_t) (rand_dbl() * g->n);
 		    /*printf("\n The new random vertex is %d \n", (int)random_vertex);*/
 	       }
 	  }

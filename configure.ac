@@ -95,7 +95,7 @@ AC_STRUCT_TM
 
 # check functions
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([gettimeofday gethrtime memset memalign drand48 log2])
+AC_CHECK_FUNCS([gettimeofday gethrtime memset memalign log2])
 
 # list of config files
 AC_CONFIG_FILES([Makefile

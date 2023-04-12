@@ -8,6 +8,8 @@
 #include "internal-timer.h"
 #include "modularity_greedy_agglomerative.h"
 
+#define drand_rng() ((double)rand()/RAND_MAX)
+
 /** Greedily grow a region around the provided seeds until the
     modularity would decrease.  The style of growth is controlled by
     alg_type.
@@ -1053,7 +1055,7 @@ random_walk(graph_t *g, attr_id_t V, int num_levels)
 	{
 	  return -2;
 	}
-      rand_num = (attr_id_t) (drand48() * deg_V);  // random number between 1 and deg_V
+      rand_num = (attr_id_t) (drand_rng() * deg_V);  // random number between 1 and deg_V
 
       index = g->numEdges[V] + rand_num;   //this will refer to an edge whose end vertex will be a random neighbor of vertex V
 

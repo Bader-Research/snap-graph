@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
     print_graph_header(fp, g, "BFS");
     
     if (src == -1)
-       src = lrand48() % g->n;
+       src = rand() % g->n;
 
     assert((src >= 0) && (src < g->n));
 
